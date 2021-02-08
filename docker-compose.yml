@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:13.0
+    restart: always
+    environment:
+      POSTGRES_USER: event
+      POSTGRES_PASSWORD: CHANGE-ME
+    volumes:
+      - database_folder:/var/lib/postgresql/data
+    networks:
+      - event_network
+  web:
+    build: ./event-service
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_USER_NAME=event
+      - DATABASE_PASSWORD=CHANGE-ME
+      - DATABASE_HOST=db
+    restart: always
+    ports:
+      - "3111:3000"
+    networks:
+      - event_network
+    depends_on:
+      - db
+networks:
+  event_network:
+volumes:
+  database_folder:
+    external:
+      name: konyhasch_database
