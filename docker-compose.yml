@@ -28,6 +28,15 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
+  front_end:
+    build: ./front-end
+    command: tail -f /dev/null
+    restart: always
+    networks: 
+      - event_network
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
 networks:
   event_network:
 volumes:
