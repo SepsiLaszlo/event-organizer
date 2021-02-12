@@ -5,6 +5,7 @@ RUN mkdir /event-service
 WORKDIR /event-service
 
 RUN gem install bundler -v 2.1.4
+
 COPY Gemfile .
 COPY Gemfile.lock .
 RUN bundle install --retry 3
