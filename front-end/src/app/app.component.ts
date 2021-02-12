@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,11 @@ import {HttpClientModule} from '@angular/common/http'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front-end';
-  readonly ROOT_URL ="events"
+  constructor(private http: HttpClient) { }
+  
+  configUrl = 'http://localhost:3111';
+  events:any
+  getEvents() {
+    this.events = this.http.get(this.configUrl+'/events');
+  }
 }
