@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+100.times do
+    Event.create(name: Faker::Company.name, description: Faker::Restaurant.description, date: Faker::Time.between(from: DateTime.now, to: DateTime.now+20))
+end
