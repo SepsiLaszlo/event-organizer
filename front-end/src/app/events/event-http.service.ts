@@ -15,4 +15,7 @@ export class EventHttpService {
   getEvents():Observable<EventModel[]> {
   return this.http.get<EventModel[]>(this.eventURL+'/events');
   }
+  getEvent(id:any):Observable<EventModel>{
+    return this.http.get<EventModel>(this.eventURL+'/events'+id);
+  }
 }

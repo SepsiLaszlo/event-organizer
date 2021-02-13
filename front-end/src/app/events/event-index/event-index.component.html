@@ -1,4 +1,4 @@
-<p>event-index works!</p>
+<h1>Események</h1>
 <div *ngFor="let event of events | async">
-    {{event.name}}
+    <a [routerLink]=event.id>{{event.name}}</a>
 </div>
