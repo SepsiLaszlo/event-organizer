@@ -8,8 +8,9 @@ import { LandingComponent } from './landing/landing.component';
 import { EventIndexComponent } from './events/event-index/event-index.component';
 import { EventShowComponent } from './events/event-show/event-show.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { EventEditComponent } from './events/event-edit/event-edit.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,13 @@ import { EventEditComponent } from './events/event-edit/event-edit.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-
-  ],
+  
+      MatFormFieldModule,
+      MatInputModule,
+     
+     
+   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
