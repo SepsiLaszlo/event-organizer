@@ -1,0 +1,13 @@
+<h1>Események</h1>
+<div>
+    <label id="new-event">Esemény neve: </label>
+    <input for="new-event" #eventName />
+
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button class="add-button" (click)="add(eventName.value); eventName.value=''">
+        Esemény létrehozása
+    </button>
+</div>
+<div *ngFor="let event of events">
+    <a routerLink="/events/{{event.id}}">{{ event.name }}</a>
+</div>

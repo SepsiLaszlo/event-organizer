@@ -1,37 +1,25 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EventsComponent } from './event/events/events.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LandingComponent } from './landing/landing.component';
-import { EventIndexComponent } from './events/event-index/event-index.component';
-import { EventShowComponent } from './events/event-show/event-show.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventEditComponent } from './events/event-edit/event-edit.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { AppRoutingModule } from './app-routing.module';
+import { EventDetailComponent } from './event/events/event-detail/event-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
-    EventIndexComponent,
-    EventShowComponent,
-    EventEditComponent
+    EventsComponent,
+    EventDetailComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-  
-      MatFormFieldModule,
-      MatInputModule,
-     
-     
-   ],
-  
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

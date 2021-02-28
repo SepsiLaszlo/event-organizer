@@ -42,4 +42,4 @@ networks:
 volumes:
   database_folder:
     external:
-      name: konyhasch_database
+      name: event_database

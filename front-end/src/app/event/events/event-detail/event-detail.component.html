@@ -1,0 +1,17 @@
+<div *ngIf="event">
+  <h2>{{event.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{event.id}}</div>
+  <div>Leírás:</div>
+  <p>{{ event.description}}</p>
+  <button (click)="goBack()">Vissza</button>
+
+  <label for="event-name">Hero name: </label>
+  <input id="event-name" [(ngModel)]="event.name" placeholder="{{event.name}}" />
+  <br>
+  <label for="event-description">Leírás:</label> <br>
+  <textarea id="event-description" rows="5" cols="50" [(ngModel)]="event.description"
+    placeholder="{{event.description}}"></textarea>
+  <br>
+  <button (click)="save()">Mentés</button>
+  <button (click)="delete(event)"> Törlés </button>
+</div>
