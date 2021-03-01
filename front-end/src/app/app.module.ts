@@ -17,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { EventTableComponent } from './event/event-table/event-table.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatCardModule} from '@angular/material/card';
+import { EventCardComponent } from './event/event-card/event-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {MatTableModule} from '@angular/material/table';
     EventsComponent,
     EventDetailComponent,
     NavBarComponent,
-    EventTableComponent
+    EventTableComponent,
+    EventCardComponent
   ],
   imports: [
     HttpClientModule,
@@ -38,7 +41,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
