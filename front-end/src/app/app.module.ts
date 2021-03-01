@@ -19,6 +19,11 @@ import { EventTableComponent } from './event/event-table/event-table.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import { EventCardComponent } from './event/event-card/event-card.component';
+import { EventCreateCardComponent } from './event/event-create-card/event-create-card.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core'
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { EventCardComponent } from './event/event-card/event-card.component';
     EventDetailComponent,
     NavBarComponent,
     EventTableComponent,
-    EventCardComponent
+    EventCardComponent,
+    EventCreateCardComponent
   ],
   imports: [
     HttpClientModule,
@@ -43,6 +49,10 @@ import { EventCardComponent } from './event/event-card/event-card.component';
     MatListModule,
     MatTableModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

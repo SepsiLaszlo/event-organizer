@@ -1,11 +1,3 @@
 <h1>Események</h1>
-<div>
-    <label id="new-event">Esemény neve: </label>
-    <input for="new-event" #eventName />
-
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button class="add-button" (click)="add(eventName.value); eventName.value=''">
-        Esemény létrehozása
-    </button>
-</div>
+<app-event-create-card></app-event-create-card>
 <app-event-table [dataSource]="events"></app-event-table>
