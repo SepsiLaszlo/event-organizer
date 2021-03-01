@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventModel } from '../event-model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -51,12 +51,18 @@ export class EventService {
       catchError(this.handleError<EventModel>('addHero'))
     );
   }
-  deleteEvent(event: EventModel | number): Observable<EventModel>{
+  deleteEvent(event: EventModel | number): Observable<EventModel> {
     const id = typeof event === 'number' ? event : event.id;
-    const url=`${this.heroesUrl}/${id}`;
+    const url = `${this.heroesUrl}/${id}`;
 
-    return this.http.delete<EventModel>(url,this.httpOptions).pipe(
+    return this.http.delete<EventModel>(url, this.httpOptions).pipe(
       catchError(this.handleError<EventModel>('delete Event'))
     );
+  }
+
+  private eventAddedSource = new Subject<EventModel>();
+  eventAdded$ = this.eventAddedSource.asObservable();
+  eventAdd(event: EventModel) {
+    this.eventAddedSource.next(event);
   }
 }

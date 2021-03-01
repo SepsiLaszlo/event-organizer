@@ -7,13 +7,22 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.css'],
+  providers: [EventService]
 })
 export class EventsComponent implements OnInit {
 
   constructor(
     private eventService: EventService
-  ) { }
+  ) { 
+    eventService.eventAdded$.subscribe(
+      event=> {
+      this.events.unshift(event)
+      this.events = this.events.slice();
+      console.log(event)
+      }
+    )
+  }
 
   events: EventModel[];;
 
@@ -34,5 +43,8 @@ export class EventsComponent implements OnInit {
         this.events.unshift(event);
         this.events = this.events.slice();
       });
+  }
+  addEvent(event:EventModel){
+    this.eventService.addEvent(event)
   }
 }
