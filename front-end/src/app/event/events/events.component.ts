@@ -12,26 +12,27 @@ import { Location } from '@angular/common';
 export class EventsComponent implements OnInit {
 
   constructor(
-    private eventService:EventService 
-  ) {}
+    private eventService: EventService
+  ) { }
 
   events: EventModel[];;
 
-   ngOnInit() {
+  ngOnInit() {
     this.getHeroes();
   }
 
   getHeroes(): void {
     this.eventService.getEvents()
-    .subscribe(heroes => this.events = heroes);
+      .subscribe(heroes => this.events = heroes);
   }
- 
+
   add(name: string): void {
-  name = name.trim();
-  if (!name) { return; }
-  this.eventService.addEvent({ name } as EventModel)
-    .subscribe(event => {
-      this.events.push(event);
-    });
-}
+    name = name.trim();
+    if (!name) { return; }
+    this.eventService.addEvent({ name } as EventModel)
+      .subscribe(event => {
+        this.events.unshift(event);
+        this.events = this.events.slice();
+      });
+  }
 }
