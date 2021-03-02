@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Subscription } from 'rxjs';
 import { EventModel } from '../event-model';
 import { EventService } from '../events/event.service';
@@ -21,6 +22,6 @@ export class EventCreateCardComponent implements OnInit {
       date:eventDate
     }
     console.log("event add")
-    this.eventService.eventAdd(newEvent)
+    this.eventService.eventAdd(newEvent).subscribe()
   }
 }
