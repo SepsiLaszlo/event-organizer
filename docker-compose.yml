@@ -37,6 +37,14 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
+  nginx:
+    image: nginx
+    ports:
+      - "8888:80"
+    networks:
+      - event_network
+    volumes:
+      - ./nginx:/etc/nginx
 networks:
   event_network:
 volumes:
