@@ -12,7 +12,8 @@ services:
       - event_network
   event:
     build: ./event-service
-    command: tail -f /dev/null
+    # command: tail -f /dev/null
+    command: rails server -b 0.0.0.0
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=event
@@ -39,12 +40,14 @@ services:
       - .:/workspace:cached
   nginx:
     image: nginx
+    # command: tail -f /dev/null
     ports:
       - "8888:80"
     networks:
       - event_network
     volumes:
       - ./nginx:/etc/nginx
+      - ./front-end/dist:/dist
 networks:
   event_network:
 volumes:
