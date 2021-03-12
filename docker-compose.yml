@@ -48,6 +48,8 @@ services:
     volumes:
       - ./nginx:/etc/nginx
       - ./front-end/dist:/dist
+    depends_on:
+      - event
 networks:
   event_network:
 volumes:
