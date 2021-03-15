@@ -60,11 +60,11 @@ export class EventService {
     );
   }
 
-  private eventAddedSource = new Subject<EventModel>();
+  eventAddedSource = new Subject<EventModel>();
   eventAdded$ = this.eventAddedSource.asObservable();
 
   eventAdd(event: EventModel): Observable<EventModel>{
-    this.eventAddedSource.next(event);
+  //  this.eventAddedSource.next(event);
     return this.http.post<EventModel>(this.heroesUrl, event, this.httpOptions).pipe(
       catchError(this.handleError<EventModel>('addHero'))
     );

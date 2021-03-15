@@ -22,6 +22,8 @@ export class EventCreateCardComponent implements OnInit {
       date:eventDate
     }
     console.log("event add")
-    this.eventService.eventAdd(newEvent).subscribe()
+    this.eventService.eventAdd(newEvent).subscribe(
+      ev => this.eventService.eventAddedSource.next(ev)
+    )
   }
 }
