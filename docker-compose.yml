@@ -37,9 +37,12 @@ services:
       - participation_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
-  participation_back_end:
+  participations:
     build: ./participation-back-end
     command: rails server -b 0.0.0.0
+    # command: tail -f /dev/null
+    ports:
+      - 3001:3000
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
@@ -74,7 +77,7 @@ services:
       - ./front-end/dist:/dist
     depends_on:
       - event_backend
-      - participation_back_end
+      - participations
 networks:
   event_network:
 volumes:
