@@ -19,8 +19,6 @@ services:
       - DATABASE_PASSWORD=CHANGE-ME
       - DATABASE_HOST=event_db
     restart: always
-    ports:
-      - "3111:3000"
     networks:
       - event_network
     depends_on:
@@ -41,7 +39,7 @@ services:
     image: nginx
     # command: tail -f /dev/null
     ports:
-      - "8888:80"
+      - "4200:80"
     networks:
       - event_network
     volumes:
