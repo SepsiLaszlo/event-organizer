@@ -26,6 +26,33 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
+
+  participation_db:
+    image: postgres:13.0
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: CHANGE-ME
+    volumes:
+      - participation_db_folder:/var/lib/postgresql/data
+    networks:
+      - event_network
+  participation_back_end:
+    build: ./participation-back-end
+    command: rails server -b 0.0.0.0
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_USER_NAME=participation
+      - DATABASE_PASSWORD=CHANGE-ME
+      - DATABASE_HOST=participation_db
+    restart: always
+    networks:
+      - event_network
+    depends_on:
+      - participation_db
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
   front_end:
     build: ./front-end
     command: tail -f /dev/null
@@ -47,9 +74,13 @@ services:
       - ./front-end/dist:/dist
     depends_on:
       - event_backend
+      - participation_back_end
 networks:
   event_network:
 volumes:
   event_db_folder:
     external:
       name: event_database
+  participation_db_folder:
+    external:
+      name: participation_database
