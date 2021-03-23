@@ -42,7 +42,7 @@ services:
     command: rails server -b 0.0.0.0
     environment:
       - RAILS_ENV=development
-      - DATABASE_USER_NAME=participation
+      - DATABASE_USER_NAME=postgres
       - DATABASE_PASSWORD=CHANGE-ME
       - DATABASE_HOST=participation_db
     restart: always
