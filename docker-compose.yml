@@ -1,31 +1,30 @@
 version: '3.3'
 services:
-  db:
+  event_db:
     image: postgres:13.0
     restart: always
     environment:
       POSTGRES_USER: event
       POSTGRES_PASSWORD: CHANGE-ME
     volumes:
-      - database_folder:/var/lib/postgresql/data
+      - event_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
-  event:
+  event_backend:
     build: ./event-service
-    # command: tail -f /dev/null
     command: rails server -b 0.0.0.0
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=event
       - DATABASE_PASSWORD=CHANGE-ME
-      - DATABASE_HOST=db
+      - DATABASE_HOST=event_db
     restart: always
     ports:
       - "3111:3000"
     networks:
       - event_network
     depends_on:
-      - db
+      - event_db
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
@@ -49,10 +48,10 @@ services:
       - ./nginx:/etc/nginx
       - ./front-end/dist:/dist
     depends_on:
-      - event
+      - event_backend
 networks:
   event_network:
 volumes:
-  database_folder:
+  event_db_folder:
     external:
       name: event_database
