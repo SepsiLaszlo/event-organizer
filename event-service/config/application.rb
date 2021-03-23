@@ -34,6 +34,6 @@ module EventService
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     
-    config.hosts << "event"
+    config.hosts << "event_backend"
   end
 end
