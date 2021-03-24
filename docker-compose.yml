@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  event_db:
+  event-db:
     image: postgres:13.0
     restart: always
     environment:
@@ -10,24 +10,24 @@ services:
       - event_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
-  event_backend:
+  event-service:
     build: ./event-service
     command: rails server -b 0.0.0.0
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=event
       - DATABASE_PASSWORD=CHANGE-ME
-      - DATABASE_HOST=event_db
+      - DATABASE_HOST=event-db
     restart: always
     networks:
       - event_network
     depends_on:
-      - event_db
+      - event-db
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
 
-  participation_db:
+  participation-db:
     image: postgres:13.0
     restart: always
     environment:
@@ -37,22 +37,20 @@ services:
       - participation_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
-  participations:
-    build: ./participation-back-end
+  participation-service:
+    build: ./participation-service
     command: rails server -b 0.0.0.0
     # command: tail -f /dev/null
-    ports:
-      - 3001:3000
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
       - DATABASE_PASSWORD=CHANGE-ME
-      - DATABASE_HOST=participation_db
+      - DATABASE_HOST=participation-db
     restart: always
     networks:
       - event_network
     depends_on:
-      - participation_db
+      - participation-db
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
@@ -76,8 +74,8 @@ services:
       - ./nginx:/etc/nginx
       - ./front-end/dist:/dist
     depends_on:
-      - event_backend
-      - participations
+      - event-service
+      - participation-service
 networks:
   event_network:
 volumes:
