@@ -63,6 +63,33 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
+  user-db:
+    image: postgres:13.0
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: CHANGE-ME
+    volumes:
+      - participation_db_folder:/var/lib/postgresql/data
+    networks:
+      - event_network
+  user-service:
+    build: ./user-service
+    command: rails server -b 0.0.0.0
+    # command: tail -f /dev/null
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_USER_NAME=postgres
+      - DATABASE_PASSWORD=CHANGE-ME
+      - DATABASE_HOST=user-db
+    restart: always
+    networks:
+      - event_network
+    depends_on:
+      - user-db
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
   nginx:
     image: nginx
     # command: tail -f /dev/null
