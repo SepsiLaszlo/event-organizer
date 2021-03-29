@@ -54,15 +54,7 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
-  front_end:
-    build: ./front-end
-    command: tail -f /dev/null
-    restart: always
-    networks: 
-      - event_network
-    volumes:
-      # Mount the root folder that contains .git
-      - .:/workspace:cached
+
   user-db:
     image: postgres:13.0
     restart: always
@@ -90,6 +82,17 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
+  front_end:
+    build: ./front-end
+    command: tail -f /dev/null
+    restart: always
+    networks: 
+      - event_network
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    profiles:
+      - "frontend"
   nginx:
     image: nginx
     # command: tail -f /dev/null
