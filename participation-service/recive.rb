@@ -6,7 +6,7 @@ connection = Bunny.new(hostname:'rabbit-mq' ,automatically_recover: false)
 connection.start
 
 channel = connection.create_channel
-queue = channel.queue('hello')
+queue = channel.queue('user-name')
 
 begin
   puts ' [*] Waiting for messages. To exit press CTRL+C'
