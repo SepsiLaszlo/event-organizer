@@ -62,7 +62,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: CHANGE-ME
     volumes:
-      - participation_db_folder:/var/lib/postgresql/data
+      - user_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
   user-service:
@@ -115,3 +115,6 @@ volumes:
   participation_db_folder:
     external:
       name: participation_database
+  user_db_folder:
+    external:
+      name: user_database

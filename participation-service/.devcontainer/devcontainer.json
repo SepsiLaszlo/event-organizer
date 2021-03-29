@@ -12,7 +12,7 @@
 	"service": "participation-service",
 	"shutdownAction": "none",
 	// Open the sub-folder with the source code
-	"workspaceFolder": "/workspace/participation-back-end",
+	"workspaceFolder": "/workspace/participation-service",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 

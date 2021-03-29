@@ -1,8 +1,8 @@
 
 FROM ruby:2.7.1
 
-RUN mkdir /participation-back-end
-WORKDIR /participation-back-end
+RUN mkdir /participation-service
+WORKDIR /participation-service
 
 RUN gem install bundler -v 2.1.4
 
