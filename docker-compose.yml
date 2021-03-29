@@ -67,8 +67,8 @@ services:
       - event_network
   user-service:
     build: ./user-service
-    command: rails server -b 0.0.0.0
-    # command: tail -f /dev/null
+    # command: rails server -b 0.0.0.0
+    command: tail -f /dev/null
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
