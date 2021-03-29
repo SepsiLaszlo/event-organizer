@@ -106,6 +106,12 @@ services:
     depends_on:
       - event-service
       - participation-service
+  rabbit-mq:
+    image: rabbitmq:3.8.14-management
+    hostname: rabbit
+    networks:
+      - event_network
+
 networks:
   event_network:
 volumes:
