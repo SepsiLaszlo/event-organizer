@@ -8,6 +8,6 @@
 100.times do |user_id|
     user_name = JSON.parse(HTTParty.get("http://user-service:3000/users/#{user_id}").body)['name']
     (1..100).to_a.sample(10).each do |event_id| 
-        Participation.create!(event_id: event_id ,user_id: user_id, user_name: user_name)
+        Participation.create!(event_id: event_id ,user_id: user_id+1, user_name: user_name)
     end
 end

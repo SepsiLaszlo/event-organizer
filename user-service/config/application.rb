@@ -37,5 +37,11 @@ module UserService
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.hosts << "user-service"
+    # Hutch::Logging.logger = Rails.logger
+    Hutch::Config.set(:mq_username, 'guest')
+    Hutch::Config.set(:mq_password, 'guest')
+    Hutch::Config.set(:mq_host, 'rabbit-mq')
+    Hutch::Config.set(:mq_api_host, 'rabbit-mq')
+    
   end
 end

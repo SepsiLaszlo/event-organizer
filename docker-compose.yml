@@ -39,8 +39,8 @@ services:
       - event_network
   participation-service:
     build: ./participation-service
-    command: rails server -b 0.0.0.0
-    # command: tail -f /dev/null
+    # command:bash -c " hutch & rails server -b 0.0.0.0"
+    command: tail -f /dev/null
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
@@ -65,10 +65,14 @@ services:
       - user_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
+  redis:
+    image: redis:6.2.1
+    networks:
+      - event_network
   user-service:
     build: ./user-service
-    # command: rails server -b 0.0.0.0
-    command: tail -f /dev/null
+    command: rails server -b 0.0.0.0
+    # command: tail -f /dev/null
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
@@ -111,6 +115,8 @@ services:
     hostname: rabbit
     networks:
       - event_network
+    ports:
+      - 4201:15672
 
 networks:
   event_network:

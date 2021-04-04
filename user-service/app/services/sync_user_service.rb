@@ -16,8 +16,8 @@ class SyncUserService
     channel = connection.create_channel
     queue = channel.queue('user-name')
 
-    message = "id:#{@user.id}, name:#{@user.name}"
-    channel.default_exchange.publish(message, routing_key: queue.name)
+    message = { id: @user.id, name: @user.name }
+    channel.default_exchange.publish(message.to_json, routing_key: queue.name)
     Rails.logger.info " [x] sent in user-name queue: #{message}"
 
     connection.close

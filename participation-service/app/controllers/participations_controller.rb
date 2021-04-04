@@ -3,7 +3,7 @@ class ParticipationsController < ApplicationController
 
   # GET /participations
   def index
-    @participations = Participation.all
+    @participations = Participation.all.order(updated_at: :desc)
 
     render json: @participations
   end

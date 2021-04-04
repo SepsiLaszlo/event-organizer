@@ -6,6 +6,6 @@ class User < ApplicationRecord
     def sync_username
         return unless name_changed?
         
-        SyncUserService.call(self)
+        Hutch.publish("user-name.change", new_name: name)
     end
 end
