@@ -12,7 +12,7 @@ services:
       - event_network
   event-service:
     build: ./event-service
-    command: rails server -b 0.0.0.0
+    command: bash -c "rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=event
@@ -39,8 +39,8 @@ services:
       - event_network
   participation-service:
     build: ./participation-service
-    # command:bash -c " hutch & rails server -b 0.0.0.0"
-    command: tail -f /dev/null
+    command: bash -c "/wait-for-it.sh rabbit-mq:15672 && rm -f ./tmp/pids/server.pid && hutch & rails server -b 0.0.0.0"
+    # command: tail -f /dev/null
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
@@ -51,6 +51,7 @@ services:
       - event_network
     depends_on:
       - participation-db
+      - rabbit-mq
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
@@ -71,7 +72,7 @@ services:
       - event_network
   user-service:
     build: ./user-service
-    command: rails server -b 0.0.0.0
+    command:  bash -c "/wait-for-it.sh rabbit-mq:15672 && rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
     # command: tail -f /dev/null
     environment:
       - RAILS_ENV=development
@@ -83,6 +84,7 @@ services:
       - event_network
     depends_on:
       - user-db
+      - rabbit-mq
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
@@ -101,7 +103,7 @@ services:
     image: nginx
     # command: tail -f /dev/null
     ports:
-      - "4200:80"
+      - "8080:80"
     networks:
       - event_network
     volumes:
@@ -110,6 +112,7 @@ services:
     depends_on:
       - event-service
       - participation-service
+      - user-service
   rabbit-mq:
     image: rabbitmq:3.8.14-management
     hostname: rabbit

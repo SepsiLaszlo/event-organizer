@@ -1,6 +1,9 @@
 
 FROM ruby:2.7.1
 
+RUN curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh > wait-for-it.sh
+RUN chmod u+x wait-for-it.sh
+
 RUN mkdir /participation-service
 WORKDIR /participation-service
 
