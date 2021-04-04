@@ -9,7 +9,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class EventService {
-  private heroesUrl = '/api/events/events'
+  private heroesUrl = '/api/events'
   constructor(
     private http: HttpClient
   ) { }
