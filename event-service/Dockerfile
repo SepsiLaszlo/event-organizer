@@ -4,7 +4,7 @@ FROM ruby:2.7.1
 RUN mkdir /event-service
 WORKDIR /event-service
 
-RUN gem install bundler -v 2.1.4
+RUN gem install bundler -v 2.2.15
 
 COPY Gemfile .
 COPY Gemfile.lock .
