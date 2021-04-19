@@ -39,8 +39,26 @@ services:
       - event_network
   participation-service:
     build: ./participation-service
-    command: bash -c "/wait-for-it.sh rabbit-mq:15672 && rm -f ./tmp/pids/server.pid && hutch & rails server -b 0.0.0.0"
+    # command: "bash -c "/wait-for-it.sh rabbit-mq:15672 && hurch"
+    command: bash -c "rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
     # command: tail -f /dev/null
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_USER_NAME=postgres
+      - DATABASE_PASSWORD=CHANGE-ME
+      - DATABASE_HOST=participation-db
+    restart: always
+    networks:
+      - event_network
+    depends_on:
+      - participation-db
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+
+  participation-hutch:
+    build: ./participation-service
+    command: hutch
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=postgres
@@ -66,13 +84,9 @@ services:
       - user_db_folder:/var/lib/postgresql/data
     networks:
       - event_network
-  redis:
-    image: redis:6.2.1
-    networks:
-      - event_network
   user-service:
     build: ./user-service
-    command:  bash -c "/wait-for-it.sh rabbit-mq:15672 && rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
+    command: bash -c "rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
     # command: tail -f /dev/null
     environment:
       - RAILS_ENV=development
