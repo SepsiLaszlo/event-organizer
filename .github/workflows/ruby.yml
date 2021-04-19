@@ -62,5 +62,5 @@ jobs:
         DATABASE_HOST: localhost
           # The default PostgreSQL port
         DATABASE_PORT: 5432
-        DATABASE_USER: postgres
+        DATABASE_USER_NAME: postgres
         DATABASE_PASSWORD: postgres
