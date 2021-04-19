@@ -31,6 +31,7 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         # Set health checks to wait until postgres has started
         options: >-
@@ -51,9 +52,9 @@ jobs:
     # uses: ruby/setup-ruby@v1
       uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
       with:
+        working-directory: event-service
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle install
     - name: Run tests
       run: bundle exec rails test
       env:
