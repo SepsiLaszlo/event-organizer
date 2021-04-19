@@ -12,7 +12,7 @@ class ParticipationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create participation" do
     assert_difference('Participation.count') do
-      post participations_url, params: { participation: { event_id: @participation.event_id, user_id: @participation.user_id, user_name: @participation.user_name } }, as: :json
+      post participations_url, params: { participation: { event_id: @participation.event_id, user_id: @participation.user_id+2, user_name: @participation.user_name } }, as: :json
     end
 
     assert_response 201

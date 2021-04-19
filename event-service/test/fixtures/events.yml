@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: First Event
   date: 2021-02-08 14:26:28
-  description: MyText
+  description: Lorem ipsum
 
 two:
-  name: MyString
+  name: Second Event
   date: 2021-02-08 14:26:28
-  description: MyText
+  description: Lorem ipsum

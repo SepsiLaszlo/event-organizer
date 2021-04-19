@@ -11,3 +11,7 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+def convert_date(date)
+  "#{date.month}/#{date.day}/#{date.year}"
+end

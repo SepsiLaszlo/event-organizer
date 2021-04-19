@@ -9,6 +9,16 @@
         "args": [
             "server", "-b","0.0.0.0"
         ]
+    },
+     {
+        "name": "Test",
+        "type": "Ruby",
+        "request": "launch",
+        "cwd": "${workspaceRoot}",
+        "program": "${workspaceRoot}/bin/rails",
+        "args": [
+            "test"
+        ]
     }
     ]
 }
