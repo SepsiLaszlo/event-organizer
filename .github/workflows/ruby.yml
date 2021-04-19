@@ -17,15 +17,16 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: event-service
     strategy:
       matrix:
         ruby-version: ['2.7.1']
 
     steps:
     - uses: actions/checkout@v2
-    - run: ls
-    - run: cd event-service
-    - run: ls
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
