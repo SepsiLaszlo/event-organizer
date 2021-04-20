@@ -102,7 +102,7 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
-  front_end:
+  front-end:
     build: ./front-end
     command: tail -f /dev/null
     restart: always
@@ -112,7 +112,9 @@ services:
       # Mount the root folder that contains .git
       - .:/workspace:cached
     profiles:
-      - "frontend"
+      - "front-end"
+    ports:
+      - 4200:4200
   nginx:
     image: nginx
     # command: tail -f /dev/null

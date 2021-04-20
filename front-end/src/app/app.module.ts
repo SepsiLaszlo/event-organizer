@@ -26,6 +26,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core'
 import {MatDialogModule} from '@angular/material/dialog';
 import { EventEditDialogComponent } from './event/event-edit-dialog/event-edit-dialog.component';
+import { UsersComponent } from './user/users/users.component';
+import { UserTableComponent } from './user/user-table/user-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { EventEditDialogComponent } from './event/event-edit-dialog/event-edit-d
     EventTableComponent,
     EventCardComponent,
     EventCreateCardComponent,
-    EventEditDialogComponent
+    EventEditDialogComponent,
+    UsersComponent,
+    UserTableComponent
     
   ],
   imports: [
@@ -58,6 +64,8 @@ import { EventEditDialogComponent } from './event/event-edit-dialog/event-edit-d
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
