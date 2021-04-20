@@ -9,7 +9,7 @@
 	// // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 	// "dockerFile": "../Dockerfile",
 	"dockerComposeFile": ["../../docker-compose.yml"],
-	"service": "front_end",
+	"service": "front-end",
 	"shutdownAction": "none",
 	// Open the sub-folder with the source code
 	"workspaceFolder": "/workspace/front-end",
