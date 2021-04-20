@@ -19,4 +19,7 @@ export class UserService {
   getUser(id:number):Observable<User>{
     return this.http.get<User>(`${this.userUrl}+${id}`)
   }
+  loginUser(id:number){
+    return this.http.post(`${this.userUrl}/${id}/login`,"")
+  }
 }

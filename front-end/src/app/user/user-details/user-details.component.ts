@@ -19,4 +19,8 @@ export class UserDetailsComponent implements OnInit {
       )
   }
 
+  login(){
+    this.userService.loginUser(this.user.id).subscribe()
+  }
+
 }
