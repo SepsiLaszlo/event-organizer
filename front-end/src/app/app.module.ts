@@ -30,6 +30,7 @@ import { UsersComponent } from './user/users/users.component';
 import { UserTableComponent } from './user/user-table/user-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatSortModule } from '@angular/material/sort';
     EventCreateCardComponent,
     EventEditDialogComponent,
     UsersComponent,
-    UserTableComponent
+    UserTableComponent,
+    UserDetailsComponent
     
   ],
   imports: [
