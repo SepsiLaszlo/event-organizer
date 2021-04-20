@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { EventsComponent } from './event/events/events.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EventDetailComponent } from './event/events/event-detail/event-detail.component';
+import { UsersComponent } from './user/users/users.component';
 
 const routes: Routes = [
   { path: '', component: EventsComponent },
   { path: 'events', component: EventsComponent },
-  { path: 'events/:id', component: EventDetailComponent }
+  { path: 'events/:id', component: EventDetailComponent },
+  { path: 'users', component: UsersComponent}
 ];
 
 @NgModule({
