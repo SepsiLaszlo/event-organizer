@@ -37,6 +37,11 @@ module UserService
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.hosts << "user-service"
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::Flash
+
     # Hutch::Logging.logger = Rails.logger
     Hutch::Config.set(:mq_username, 'guest')
     Hutch::Config.set(:mq_password, 'guest')
@@ -45,6 +50,6 @@ module UserService
     Hutch::Config.set(:force_publisher_confirms, true)
     Hutch::Logging.logger = Rails.logger
  
-    Hutch.connect
+    # Hutch.connect
   end
 end

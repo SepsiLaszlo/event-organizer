@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :login]
 
   # GET /users
   def index
@@ -40,6 +40,12 @@ class UsersController < ApplicationController
 
   def names
     render json: User.all.select(:name)
+  end
+
+  def login
+    session['user-id'] = @user.id
+
+    render json: @user
   end
   
   private
