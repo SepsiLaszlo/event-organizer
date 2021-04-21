@@ -10,16 +10,25 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  userUrl = 'api/users/';
+  userUrl = 'api/users';
 
-  getUsers():Observable<User[]> {
+  getAll():Observable<User[]> {
     return this.http.get<User[]>(this.userUrl);
   }
 
-  getUser(id:number):Observable<User>{
-    return this.http.get<User>(`${this.userUrl}+${id}`)
+  get(id:number):Observable<User>{
+    return this.http.get<User>(`${this.userUrl}/${id}`)
   }
-  loginUser(id:number){
+
+  login(id:number){
     return this.http.post(`${this.userUrl}/${id}/login`,"")
+  }
+
+  logout(){
+    return this.http.post(`${this.userUrl}/logout`,"")
+  }
+
+  current():Observable<User>{
+    return this.http.get<User>(`${this.userUrl}/current`)
   }
 }

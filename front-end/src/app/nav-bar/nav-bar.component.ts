@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from '../user/user.service';
+import { User } from '../user/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,6 +18,17 @@ export class NavBarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  currentUser: User
+  constructor(private breakpointObserver: BreakpointObserver,
+    private userService: UserService) {
+    userService.current().subscribe(
+      user => this.currentUser = user
+    )
+  }
+  logout(){
+    this.userService.logout().subscribe(
+      () => this.currentUser=null
+    )
+  }
 
 }

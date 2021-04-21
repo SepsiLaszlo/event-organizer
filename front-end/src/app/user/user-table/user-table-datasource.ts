@@ -45,7 +45,7 @@ export class UserTableDataSource extends DataSource<User> {
 
   constructor(private userService:UserService) {
     super();
-    userService.getUsers().subscribe((users)=>this.data = users)
+    userService.getAll().subscribe((users)=>this.data = users)
   }
 
   /**

@@ -8,6 +8,8 @@
       <a mat-list-item routerLink='/'>Főoldal</a>
       <a mat-list-item routerLink='/events'>Események</a>
       <a mat-list-item routerLink='/users'>Felhasználók</a>
+      <a *ngIf="currentUser" mat-list-item routerLink="/users/{{currentUser.id}}">{{currentUser.name}}</a>
+      <a *ngIf="currentUser" (click)="logout()" mat-list-item >Kijeletkezés</a>
       <!-- <a mat-list-item href="#">Link 2</a>
       <a mat-list-item href="#">Link 3</a> -->
     </mat-nav-list>

@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   users:User[]
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((users) => this.users = users)
+    this.userService.getAll().subscribe((users) => this.users = users)
   }
 
 }

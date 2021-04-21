@@ -42,10 +42,21 @@ class UsersController < ApplicationController
     render json: User.all.select(:name)
   end
 
+  # POST /users/1/login
   def login
     session['user-id'] = @user.id
 
     render json: @user
+  end
+
+  # POST /users/logout
+  def logout
+    reset_session
+  end
+
+  # GET /users/current
+  def current
+    render json: current_user
   end
   
   private
@@ -57,5 +68,11 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name)
+    end
+
+    def current_user
+      user_id = session['user-id']
+
+      User.find(user_id) if user_id
     end
 end
