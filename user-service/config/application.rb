@@ -38,9 +38,9 @@ module UserService
     config.api_only = true
     config.hosts << "user-service"
 
+    config.session_store :cookie_store, key: '_user_session'
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
-    config.middleware.use ActionDispatch::Flash
+    config.middleware.use config.session_store, config.session_options
 
     # Hutch::Logging.logger = Rails.logger
     Hutch::Config.set(:mq_username, 'guest')
@@ -50,6 +50,6 @@ module UserService
     Hutch::Config.set(:force_publisher_confirms, true)
     Hutch::Logging.logger = Rails.logger
  
-    # Hutch.connect
+    Hutch.connect
   end
 end
