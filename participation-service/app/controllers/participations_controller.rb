@@ -38,6 +38,19 @@ class ParticipationsController < ApplicationController
     @participation.destroy
   end
 
+  # GET /participations/for_user/1
+  def for_user
+    @participations = Participation.where(user_id: params['user_id'])
+
+    render json: @participations 
+  end
+
+  def for_event
+    @participations = Participation.where(event_id: params['event_id'])
+
+    render json: @participations 
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_participation

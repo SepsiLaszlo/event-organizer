@@ -5,6 +5,10 @@ import { EventService } from '../event.service';
 import { Location } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEditDialogComponent } from '../../event-edit-dialog/event-edit-dialog.component';
+import { Observable } from 'rxjs';
+import { Participation } from 'src/app/participation/participation';
+import { ParticipationService } from 'src/app/participation/participation.service';
+import { parseTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-event-detail',
@@ -13,21 +17,23 @@ import { EventEditDialogComponent } from '../../event-edit-dialog/event-edit-dia
 })
 export class EventDetailComponent implements OnInit {
   event: EventModel;
-
+  participations$:Observable<Participation[]>
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
     private location: Location,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private participationService: ParticipationService
 
   ) { }
 
   ngOnInit(): void {
-    this.getEvent()
-  }
-  getEvent() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.getEvent(id)
+    this.participations$ = this.participationService.getForEvent(id)
+  }
+  getEvent(id) {
     this.eventService.getEvent(id)
       .subscribe(event => this.event = event)
   }

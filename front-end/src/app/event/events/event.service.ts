@@ -69,4 +69,6 @@ export class EventService {
       catchError(this.handleError<EventModel>('addHero'))
     );
   }
+
+  participant
 }

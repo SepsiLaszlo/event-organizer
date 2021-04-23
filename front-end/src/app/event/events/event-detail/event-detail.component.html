@@ -1,6 +1,9 @@
 <div *ngIf="event">
   <app-event-card [event]="event"></app-event-card>
 </div>
+
+<div *ngFor="let participation of participations$ | async"> {{ participation.user_name}}</div>
+
 <button (click)="goBack()" mat-raised-button color="primary">Vissza</button>
 
 <button style="float: right;" (click)="delete(event)" mat-raised-button color="warn">Töröl</button>
