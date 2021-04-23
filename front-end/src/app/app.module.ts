@@ -31,6 +31,7 @@ import { UserTableComponent } from './user/user-table/user-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { ParticipationTableComponent } from './event/participation-table/participation-table.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +45,8 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
     EventEditDialogComponent,
     UsersComponent,
     UserTableComponent,
-    UserDetailsComponent
-    
+    UserDetailsComponent,
+    ParticipationTableComponent,    
   ],
   imports: [
     HttpClientModule,

@@ -2,7 +2,8 @@
   <app-event-card [event]="event"></app-event-card>
 </div>
 
-<div *ngFor="let participation of participations$ | async"> {{ participation.user_name}}</div>
+<!-- <div *ngFor="let participation of participations$ | async"> {{ participation.user_name}}</div> -->
+<app-participation-table [participation$]="participations$"></app-participation-table>
 
 <button (click)="goBack()" mat-raised-button color="primary">Vissza</button>
 

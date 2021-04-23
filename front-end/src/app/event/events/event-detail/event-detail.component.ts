@@ -5,10 +5,11 @@ import { EventService } from '../event.service';
 import { Location } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEditDialogComponent } from '../../event-edit-dialog/event-edit-dialog.component';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Participation } from 'src/app/participation/participation';
 import { ParticipationService } from 'src/app/participation/participation.service';
 import { parseTemplate } from '@angular/compiler';
+import {ParticipationTableComponent} from '../../participation-table/participation-table.component'
 
 @Component({
   selector: 'app-event-detail',
