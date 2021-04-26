@@ -10,6 +10,8 @@ import { Participation } from 'src/app/participation/participation';
 import { ParticipationService } from 'src/app/participation/participation.service';
 import { parseTemplate } from '@angular/compiler';
 import {ParticipationTableComponent} from '../../participation-table/participation-table.component'
+import { UserService } from 'src/app/user/user.service';
+import { switchAll } from 'rxjs/operators';
 
 @Component({
   selector: 'app-event-detail',
@@ -25,14 +27,15 @@ export class EventDetailComponent implements OnInit {
     private location: Location,
     private router: Router,
     public dialog: MatDialog,
-    private participationService: ParticipationService
+    private participationService: ParticipationService,
+    private userService:UserService
 
   ) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getEvent(id)
-    this.participations$ = this.participationService.getForEvent(id)
+    this.participations$ = this.participationService.getForEvent(id).pipe( )
   }
   getEvent(id) {
     this.eventService.getEvent(id)
@@ -50,6 +53,22 @@ export class EventDetailComponent implements OnInit {
     this.eventService.deleteEvent(event).subscribe(
       _ => this.router.navigate(['events'])
     );
+  }
+  
+  register(){
+   this.userService.current().subscribe(
+     user => {
+       let participation:Participation ={
+         user_id:user.id,
+         user_name: user.name,
+         event_id: this.event.id,
+         id: -1
+       }
+       this.participationService.create(participation).subscribe(
+         participation => console.log(participation)
+         )
+     }
+   )
   }
 
   openDialog() {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, partition } from 'rxjs';
 import { User } from '../user/user';
 import { Participation } from './participation'
 @Injectable({
@@ -25,5 +25,8 @@ export class ParticipationService {
   getForEvent(id:number)
   {
     return this.http.get<Participation[]>(`${this.participationUrl}/for_event/${id}`);
+  }
+  create( participation:Participation): Observable<Participation>{
+    return this.http.post<Participation>(this.participationUrl, participation)
   }
 }
