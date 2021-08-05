@@ -12,7 +12,6 @@ services:
       - event_network
   event-service:
     build: ./event-service
-    command: bash -c "rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
     environment:
       - RAILS_ENV=development
       - DATABASE_USER_NAME=event
@@ -102,6 +101,10 @@ services:
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
+    ports:
+      - 3456:3000  
+    labels:
+      - "traefik.http.routers.user-service.rule=Path(`/users`)"
   front-end:
     build: ./front-end
     command: tail -f /dev/null

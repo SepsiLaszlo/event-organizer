@@ -7,4 +7,8 @@ RUN npm install --save-dev @angular-devkit/build-angular
 RUN mkdir /front-end
 WORKDIR /front-end
 
+COPY package.json
+COPY package-lock.json
+RUN npm install
+
 COPY . .
