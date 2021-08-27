@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-deployment
+  labels:
+    app: event
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event
+  template:
+    metadata:
+      labels:
+        app: event
+    spec:
+      containers:
+      - name: event
+        image: slaac/event-service:main
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+        env:
+        - name: DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: event-db-config
+              key: postgres_host
+        - name: DATABASE_USER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: event-db-config
+              key: postgres_user      
+        - name: DATABASE_PASSWORD 
+          valueFrom:
+            configMapKeyRef:
+              name: event-db-config
+              key: postgres_password        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-service
+spec:
+  type: NodePort
+  selector:
+    app: event
+  ports:
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 3000
+      targetPort: 3000
