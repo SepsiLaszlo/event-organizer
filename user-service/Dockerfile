@@ -18,3 +18,4 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt update && apt install yarn -y
 
 COPY . .
+CMD bash -c "rm -f ./tmp/pids/server.pid && rails server -b 0.0.0.0"
