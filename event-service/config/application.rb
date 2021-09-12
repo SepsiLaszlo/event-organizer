@@ -35,5 +35,6 @@ module EventService
     config.api_only = true
     
     config.hosts << "event-service"
+    config.hosts << "myapp.com"
   end
 end
