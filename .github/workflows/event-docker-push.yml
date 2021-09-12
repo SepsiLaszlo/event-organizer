@@ -1,4 +1,4 @@
-name: docker-push
+name: event-docker-push
 
 on:
   push:
