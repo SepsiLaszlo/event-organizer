@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: event
-        image: slaac/event-service:main
+        image: slaac/event-service:0.1.2
         ports:
         - containerPort: 3000
         resources:
