@@ -5,7 +5,15 @@ class User < ApplicationRecord
 
     def sync_username
         return unless name_changed?
-         
-        Hutch.publish("user-name.change",id: id, new_name: name)
-    end
+
+        unless Hutch.connected?
+            begin
+              Hutch.connect
+            rescue Hutch::ConnectionError
+              Rails.logger.debug 'Hutch::ConnectionError'              
+            else
+              Hutch.publish("user-name.change",id: id, new_name: name)
+            end
+        end
+      end
 end
