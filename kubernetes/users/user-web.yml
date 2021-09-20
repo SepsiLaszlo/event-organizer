@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-app
+  template:
+    metadata:
+      labels:
+        app: user-app
+    spec:
+      containers:
+      - name: user-app
+        image: slaac/user-service:0.1.8
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+        env:
+        - name: DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: user-db-config
+              key: postgres_host
+        - name: DATABASE_USER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: user-db-config
+              key: postgres_user      
+        - name: DATABASE_PASSWORD 
+          valueFrom:
+            configMapKeyRef:
+              name: user-db-config
+              key: postgres_password          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
