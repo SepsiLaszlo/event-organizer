@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: user-pv
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: user-pvc
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+ 
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-db-config
+data:
+  postgres_user: "postgres"
+  postgres_password: "postgres"
+  postgres_host: "user-db-service"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: user-db-deployment
+  labels:
+    app: user-db
+spec:
+  serviceName: "user-db-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-db
+  template:
+    metadata:
+      labels:
+        app: user-db
+    spec:
+      volumes:
+      - name: user-pv-storage
+        persistentVolumeClaim:
+          claimName: user-pvc
+      containers:
+      - name: user-db
+        image: postgres:13.4
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD 
+          valueFrom:
+            configMapKeyRef:
+              name: user-db-config
+              key: postgres_password 
+        volumeMounts:
+          - mountPath: "/var/lib/postgresql/data"
+            name: user-pv-storage      
+                
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-db-service
+spec:
+  type: NodePort
+  selector:
+    app: user-db
+  ports:
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 5432
+      targetPort: 5432
