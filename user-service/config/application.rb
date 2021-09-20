@@ -49,7 +49,5 @@ module UserService
     Hutch::Config.set(:mq_api_host, 'rabbit-mq')
     Hutch::Config.set(:force_publisher_confirms, true)
     Hutch::Logging.logger = Rails.logger
- 
-    Hutch.connect
   end
 end
