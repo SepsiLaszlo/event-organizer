@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-deployment
+  name: participation-deployment
   labels:
-    app: user
+    app: participation
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user
+      app: participation
   template:
     metadata:
       labels:
-        app: user
+        app: participation
     spec:
       containers:
-      - name: user
-        image: slaac/user-service:0.1.10
+      - name: participation
+        image: slaac/participation-service:0.1.10
         ports:
         - containerPort: 3000
         resources:
@@ -27,27 +27,27 @@ spec:
         - name: DATABASE_HOST
           valueFrom:
             configMapKeyRef:
-              name: user-db-config
+              name: participation-db-config
               key: postgres_host
         - name: DATABASE_USER_NAME
           valueFrom:
             configMapKeyRef:
-              name: user-db-config
+              name: participation-db-config
               key: postgres_user      
         - name: DATABASE_PASSWORD 
           valueFrom:
             configMapKeyRef:
-              name: user-db-config
+              name: participation-db-config
               key: postgres_password        
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: participation-service
 spec:
   type: NodePort
   selector:
-    app: user
+    app: participation
   ports:
       # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
     - port: 3000
