@@ -13,16 +13,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: whoami-svc
+                name: traefik
                 port:
                   number: 80
-          - path: /api/events
-            pathType: Prefix
-            backend:
-              service:
-                name: event-service
-                port:
-                  number: 3000
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
