@@ -37,6 +37,7 @@ module UserService
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.hosts << "user-service"
+    config.hosts << ENV["WEB_HOST"]
 
     config.session_store :cookie_store, key: '_user_session'
     config.middleware.use ActionDispatch::Cookies

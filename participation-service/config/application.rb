@@ -37,6 +37,7 @@ module ParticipationBackEnd
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.hosts << "participation-service"
+    config.hosts << ENV["WEB_HOST"]
     Hutch::Config.set(:mq_username, 'guest')
     Hutch::Config.set(:mq_password, 'guest')
     Hutch::Config.set(:mq_host, 'rabbit-mq')
