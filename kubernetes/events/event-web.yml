@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: event
-        image: slaac/event-service:0.1.2
+        image: slaac/event-service:0.2.1
         ports:
         - containerPort: 3000
         resources:
@@ -38,7 +38,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: event-db-config
-              key: postgres_password        
+              key: postgres_password
+        - name: WEB_HOST 
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: web_host  
 ---
 apiVersion: v1
 kind: Service
@@ -51,4 +56,4 @@ spec:
   ports:
       # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
     - port: 3000
-      targetPort: 3000
+      targetPort: 3000    

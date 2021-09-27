@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: participation
-        image: slaac/participation-service:0.1.10
+        image: slaac/participation-service:0.2.3
         ports:
         - containerPort: 3000
         resources:
@@ -38,7 +38,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: participation-db-config
-              key: postgres_password        
+              key: postgres_password
+        - name: WEB_HOST 
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: web_host               
 ---
 apiVersion: v1
 kind: Service
