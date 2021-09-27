@@ -5,9 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-100.times do |user_id|
-    user_name = JSON.parse(HTTParty.get("http://user-service:3000/users/#{user_id}").body)['name']
-    (1..100).to_a.sample(10).each do |event_id| 
-        Participation.create!(event_id: event_id ,user_id: user_id+1, user_name: user_name)
+100.times do |i|
+    10.times do |j| 
+        Participation.create!(event_id: i ,user_id: j)
     end
 end
