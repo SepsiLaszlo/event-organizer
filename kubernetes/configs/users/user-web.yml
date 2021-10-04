@@ -43,14 +43,253 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: application-config
-              key: web_host      
+              key: web_host
+        # - name: RABBITMQ_USERNAME
+        #   valueFrom:
+        #    secretKeyRef:
+        #     name: definition-default-user
+        #     key: username
+        # - name: RABBITMQ_PASSWORD
+        #   valueFrom:
+        #    secretKeyRef:
+        #     name: definition-default-user
+        #     key: passwo
+￼Comic & Webtoon
+￼Cosplay
+￼Gaming
+￼GIF
+￼Girl Celebrity
+￼League of Legends
+￼Meme
+￼Politics
+￼Relationship
+￼Savage
+￼Video
+All Sections
+￼Among Us
+￼Anime Wallpaper
+￼Apex Legends
+￼Ask 9GAG
+￼Coronavirus
+￼Countryballs
+￼Cozy & Comfy
+￼Crappy Design
+￼Cyberpunk 2077
+￼Drawing, DIY & Crafts
+￼Football
+￼Fashion & Beauty
+￼Food & Drinks
+￼Fortnite
+￼Game of Thrones
+￼Guy
+￼History
+￼Horror
+￼K-Pop
+￼Latest News
+￼LEGO
+￼Marvel & DC
+￼Movie & TV
+￼Music
+￼NBA
+￼Sport
+￼Spooktober 🎃
+￼Overwatch
+￼PC Master Race
+￼Pokémon
+￼PUBG
+￼Resident Evil 8
+￼Satisfying
+￼Science & Tech
+￼Star Wars
+￼Teens Can Relate
+￼Travel & Photography
+￼Wallpaper
+￼Warhammer
+￼Wholesome
+￼Dark Humor
+HotTrendingFreshTop
+￼
+Funny · 25m
+Mark Zuckerberg looking at his technical team
+￼
+•
+•
+36
+Facebook
+Pinterest
+￼
+Funny · 27m
+Welcome back
+￼
+•
+•
+20
+Facebook
+Pinterest
+￼
+Promoted
+
+•
+•
+0
+Facebook
+Pinterest
+￼
+Funny · 13m
+Mesmerizing
+GIF
+•
+•
+15
+Facebook
+Pinterest
+￼
+WTF · 46m
+The what?
+￼
+432
+23
+12
+Facebook
+Pinterest
+￼
+Random · 33m
+Oh no
+0:32
+Play
+195
+11
+7
+￼Comic & Webtoon
+￼Cosplay
+￼Gaming
+￼GIF
+￼Girl Celebrity
+￼League of Legends
+￼Meme
+￼Politics
+￼Relationship
+￼Savage
+￼Video
+All Sections
+￼Among Us
+￼Anime Wallpaper
+￼Apex Legends
+￼Ask 9GAG
+￼Coronavirus
+￼Countryballs
+￼Cozy & Comfy
+￼Crappy Design
+￼Cyberpunk 2077
+￼Drawing, DIY & Crafts
+￼Football
+￼Fashion & Beauty
+￼Food & Drinks
+￼Fortnite
+￼Game of Thrones
+￼Guy
+￼History
+￼Horror
+￼K-Pop
+￼Latest News
+￼LEGO
+￼Marvel & DC
+￼Movie & TV
+￼Music
+￼NBA
+￼Sport
+￼Spooktober 🎃
+￼Overwatch
+￼PC Master Race
+￼Pokémon
+￼PUBG
+￼Resident Evil 8
+￼Satisfying
+￼Science & Tech
+￼Star Wars
+￼Teens Can Relate
+￼Travel & Photography
+￼Wallpaper
+￼Warhammer
+￼Wholesome
+￼Dark Humor
+HotTrendingFreshTop
+￼
+Funny · 25m
+Mark Zuckerberg looking at his technical team
+￼
+•
+•
+36
+Facebook
+Pinterest
+￼
+Funny · 27m
+Welcome back
+￼
+•
+•
+20
+Facebook
+Pinterest
+￼
+Promoted
+
+•
+•
+0
+Facebook
+Pinterest
+￼
+Funny · 13m
+Mesmerizing
+GIF
+•
+•
+15
+Facebook
+Pinterest
+￼
+WTF · 46m
+The what?
+￼
+432
+23
+12
+Facebook
+Pinterest
+￼
+Random · 33m
+Oh no
+0:32
+Play
+195
+11
+7
+Facebook
+Pinterest
+￼
+Anime & Manga · 1h
+She has some money now
+
+Facebook
+Pinterest
+￼
+Anime & Manga · 1h
+She has some money now
+rd
+        # - name: RABBITMQ_HOST
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: application-config
+        #       key: rabbitmq_host
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: user-service
 spec:
-  type: NodePort
   selector:
     app: user
   ports:

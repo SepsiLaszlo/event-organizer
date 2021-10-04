@@ -24,7 +24,7 @@ metadata:
 spec:
   stripPrefixRegex:
     regex:
-      - /api/[a-z0-9]+/
+      - /api/
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -35,8 +35,8 @@ spec:
     - kind: Rule
       match: Host(`myapp.com`) && PathPrefix(`/`)
       services:
-        - name: event-service
-          port: 3000
+        - name: front-end-service
+          port: 80
     - kind: Rule
       match: Host(`myapp.com`) && PathPrefix(`/api/events`)
       middlewares:

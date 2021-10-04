@@ -4,3 +4,4 @@ metadata:
   name: application-config
 data:
   web_host: "myapp.com"
+  rabbitmq_host: "definitionxxx"
