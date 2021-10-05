@@ -38,10 +38,10 @@ module ParticipationBackEnd
     config.api_only = true
     config.hosts << "participation-service"
     config.hosts << ENV["WEB_HOST"]
-    Hutch::Config.set(:mq_username, 'guest')
-    Hutch::Config.set(:mq_password, 'guest')
-    Hutch::Config.set(:mq_host, 'rabbit-mq')
-    Hutch::Config.set(:mq_api_host, 'rabbit-mq')
+    Hutch::Config.set(:mq_username, ENV["RABBITMQ_USERNAME"])
+    Hutch::Config.set(:mq_password, ENV["RABBITMQ_PASSWORD"])
+    Hutch::Config.set(:mq_host, ENV["RABBITMQ_HOST"])
+    Hutch::Config.set(:mq_api_host, ENV["RABBITMQ_HOST"])
     Hutch::Logging.logger = Rails.logger
   end
 end
