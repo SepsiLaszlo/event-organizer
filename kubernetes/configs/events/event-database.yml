@@ -61,8 +61,8 @@ spec:
         image: postgres:13.4
         resources:
           limits:
-            memory: "1Gi"
-            cpu: "500m"
+            memory: "125Mi"
+            cpu: "125m"
         ports:
         - containerPort: 5432
         env:

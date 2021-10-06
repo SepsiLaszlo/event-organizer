@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: participation-deployment
+  name: participation-hutch-deployment
   labels:
-    app: participation
+    app: participation-hutch
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: participation
+      app: participation-hutch
   template:
     metadata:
       labels:
-        app: participation
+        app: participation-hutch
     spec:
       containers:
-      - name: participation
-        image: slaac/participation-service:0.2.3
-        ports:
-        - containerPort: 3000
+      - name: participation-hutch
+        image: slaac/participation-service:0.2.6
+        command:
+          - "hutch"
         resources:
           limits:
-            memory: "300Mi"
-            cpu: "300m"
+            memory: "125Mi"
+            cpu: "125m"
         env:
         - name: DATABASE_HOST
           valueFrom:
@@ -43,16 +43,19 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: application-config
-              key: web_host               
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: participation-service
-spec:
-  selector:
-    app: participation
-  ports:
-      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
-    - port: 3000
-      targetPort: 3000
+              key: web_host
+        - name: RABBITMQ_USERNAME
+          valueFrom:
+           secretKeyRef:
+            name: rabbitmq-cluster-default-user
+            key: username
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+           secretKeyRef:
+            name: rabbitmq-cluster-default-user
+            key: password
+        - name: RABBITMQ_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: rabbitmq_host
