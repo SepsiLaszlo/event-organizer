@@ -11,9 +11,8 @@ class User < ApplicationRecord
               Hutch.connect
             rescue Hutch::ConnectionError
               Rails.logger.debug 'Hutch::ConnectionError'              
-            else
-              Hutch.publish("user-name.change",id: id, new_name: name)
             end
         end
-      end
+        Hutch.publish("user-name.change",id: id, new_name: name)
+    end
 end
