@@ -16,13 +16,9 @@ spec:
     spec:
       containers:
       - name: user
-        image: slaac/user-service:0.2.5
+        image: slaac/user-service:0.2.7
         ports:
         - containerPort: 3000
-        resources:
-          limits:
-            memory: "300Mi"
-            cpu: "125m"
         env:
         - name: DATABASE_HOST
           valueFrom:

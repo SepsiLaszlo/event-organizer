@@ -4166,13 +4166,6 @@ spec:
                 minimum: 0
                 type: integer
               resources:
-                default:
-                  limits:
-                    cpu: 2000m
-                    memory: 2Gi
-                  requests:
-                    cpu: 1000m
-                    memory: 2Gi
                 description: The desired compute resource requirements of Pods in
                   the cluster.
                 properties:

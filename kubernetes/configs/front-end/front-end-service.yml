@@ -19,10 +19,6 @@ spec:
         image: slaac/front-end:0.2.4
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            memory: "125Mi"
-            cpu: "125m"
 ---
 apiVersion: v1
 kind: Service

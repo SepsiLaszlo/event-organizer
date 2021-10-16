@@ -19,10 +19,6 @@ spec:
         image: slaac/participation-service:0.2.3
         ports:
         - containerPort: 3000
-        resources:
-          limits:
-            memory: "300Mi"
-            cpu: "300m"
         env:
         - name: DATABASE_HOST
           valueFrom:

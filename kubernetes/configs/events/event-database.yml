@@ -59,10 +59,6 @@ spec:
       containers:
       - name: event-db
         image: postgres:13.4
-        resources:
-          limits:
-            memory: "125Mi"
-            cpu: "125m"
         ports:
         - containerPort: 5432
         env:
