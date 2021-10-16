@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: slaac/front-end:0.2.4
+        image: slaac/front-end:0.2.8
         ports:
         - containerPort: 80
 ---
