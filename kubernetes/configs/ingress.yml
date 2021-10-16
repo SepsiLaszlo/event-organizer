@@ -35,26 +35,26 @@ metadata:
 spec:
   routes:
     - kind: Rule
-      match: Host(`myapp.com`) && PathPrefix(`/`)
+      match: PathPrefix(`/`)
       services:
         - name: front-end-service
           port: 80
     - kind: Rule
-      match: Host(`myapp.com`) && PathPrefix(`/api/events`)
+      match: PathPrefix(`/api/events`)
       middlewares:
         - name: strip-api-prefix
       services:
         - name: event-service
           port: 3000
     - kind: Rule
-      match: Host(`myapp.com`) && PathPrefix(`/api/users`)
+      match: PathPrefix(`/api/users`)
       middlewares:
         - name: strip-api-prefix
       services:
         - name: user-service
           port: 3000
     - kind: Rule
-      match: Host(`myapp.com`) && PathPrefix(`/api/participations`)
+      match: PathPrefix(`/api/participations`)
       middlewares:
         - name: strip-api-prefix
       services:
