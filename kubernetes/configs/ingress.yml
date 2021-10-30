@@ -28,6 +28,17 @@ spec:
       - /api/
 ---
 apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: user-auth
+spec:
+  forwardAuth:
+    address: http://user-service:3000/users/authenticate
+    authResponseHeaders:
+      - User-Id
+      - User-Name      
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: ingressroute
@@ -42,6 +53,7 @@ spec:
       match: PathPrefix(`/api/events`)
       middlewares:
         - name: strip-api-prefix
+        - name: user-auth
       services:
         - name: event-service
           port: 3000
