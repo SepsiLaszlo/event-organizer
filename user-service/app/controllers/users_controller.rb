@@ -42,6 +42,33 @@ class UsersController < ApplicationController
     render json: User.all.select(:name)
   end
 
+  # POST /users/authenticate
+  def authenticate
+    token = request.env["HTTP_AUTHORIZATION"].split[1]
+    decoded_token = JWT.decode token, nil, false
+    user_id = decoded_token[0]['id']
+    begin
+    user = User.find(user_id)
+
+    rescue ActiveRecord::RecordNotFound
+      return render status: :forbidden unless user
+    end
+
+    response.set_header('User-Id',user_id)
+    response.set_header('User-Name',user.name)
+    render status: :ok
+  end
+  
+  # POST /users/authenticate
+  def signin
+    user = User.find_by(email: params['email'])
+    payload = { id: user.id }
+
+    token = JWT.encode payload, nil, 'none'
+    render plain: "token: #{token}"
+  end
+
+
   # POST /users/1/login
   def login
     session['user-id'] = @user.id
