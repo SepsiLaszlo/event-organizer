@@ -264,26 +264,26 @@ ports:
     protocol: TCP
   web:
     port: 8000
-    # hostPort: 8000
+    hostPort: 80
     expose: true
     exposedPort: 80
     # The port protocol (TCP/UDP)
     protocol: TCP
     # Use nodeport if set. This is useful if you have configured Traefik in a
     # LoadBalancer
-    # nodePort: 32080
+    # nodePort: 80
     # Port Redirections
     # Added in 2.2, you can make permanent redirects via entrypoints.
     # https://docs.traefik.io/routing/entrypoints/#redirection
     # redirectTo: websecure
   websecure:
     port: 8443
-    # hostPort: 8443
+    hostPort: 443
     expose: true
     exposedPort: 443
     # The port protocol (TCP/UDP)
     protocol: TCP
-    # nodePort: 32443
+    # nodePort: 443
     # Set TLS at the entrypoint
     # https://doc.traefik.io/traefik/routing/entrypoints/#tls
     tls:
@@ -328,7 +328,7 @@ tlsOptions: {}
 # from.
 service:
   enabled: true
-  type: LoadBalancer
+  type: NodePort
   # Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
   annotations: {}
   # Additional annotations for TCP service only
