@@ -42,16 +42,21 @@ class UsersController < ApplicationController
     render json: User.all.select(:name)
   end
 
-  # POST /users/authenticate
+  # GET /users/authenticate
   def authenticate
+    begin
     token = request.env["HTTP_AUTHORIZATION"].split[1]
     decoded_token = JWT.decode token, nil, false
     user_id = decoded_token[0]['id']
+    rescue StandardError
+      return render status: :unauthorized
+    end
+
     begin
     user = User.find(user_id)
 
     rescue ActiveRecord::RecordNotFound
-      return render status: :forbidden unless user
+      return render status: :forbidden
     end
 
     response.set_header('User-Id',user_id)
@@ -59,7 +64,7 @@ class UsersController < ApplicationController
     render status: :ok
   end
   
-  # POST /users/authenticate
+  # POST /users/signin
   def signin
     user = User.find_by(email: params['email'])
     payload = { id: user.id }
@@ -76,6 +81,7 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+
   # POST /users/logout
   def logout
     reset_session
@@ -85,6 +91,28 @@ class UsersController < ApplicationController
   def current
     render json: current_user
   end
+
+  def callback
+    response = HTTParty.post('https://github.com/login/oauth/access_token',
+    query:{ client_id: ENV['GITHUB-CLINENT-ID'],
+      client_secret: ENV['GITHUB-CLIENT-SECRET'],
+      code: params['code']})
+
+
+    token = response.body.split('&')[0].split('=')[1]
+    data_response = HTTParty.get("https://api.github.com/user", headers: {"Authorization" => "token #{token}"})
+
+    data = JSON.parse(data_response.body)
+    github_id = data['id']
+    user = User.find_or_create_by(github_id: github_id, name: data['login'])
+    payload = { id: user.id }
+
+    jwt = JWT.encode payload, nil, 'none'
+  
+    redirect_to "/token?token=#{jwt}"
+  end
+
+    
   
   private
     # Use callbacks to share common setup or constraints between actions.
