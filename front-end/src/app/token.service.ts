@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,5 +16,13 @@ export class TokenService {
 
   setToken(token){
     this.token = token;
+  }
+
+  headers():Object{
+    return  {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })}
   }
 }

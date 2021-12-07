@@ -10,12 +10,14 @@ import { TokenService } from '../token.service';
 })
 export class TokenComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private tokenService: TokenService) { }
+  constructor(private route: ActivatedRoute, private router:Router, private tokenService: TokenService) { }
 
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      console.log('token init')
       this.tokenService.setToken(params['token']);
+      this.router.navigate(['/users']);
     });
   }
 

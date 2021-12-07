@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './user';
@@ -17,8 +17,6 @@ export class UserService {
   userUrl = 'api/users';
   
   getAll():Observable<User[]> {
-    let token = this.tokenService.getToken(); 
-
     return this.http.get<User[]>(this.userUrl);
   }
 
@@ -35,7 +33,7 @@ export class UserService {
   }
 
   current():Observable<User>{
-    return this.http.get<User>(`${this.userUrl}/current`)
+     return this.http.get<User>(`${this.userUrl}/current`, this.httpOptions())
   }
 
   request(){
@@ -44,4 +42,14 @@ export class UserService {
       { queryParams: { order: 'popular' } }
     );
   }
+
+  token(){
+    this.tokenService.getToken();
+  }
+
+  httpOptions():Object{
+    return this.tokenService.headers()
+  }
+    
+
 }

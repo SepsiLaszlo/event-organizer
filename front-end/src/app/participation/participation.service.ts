@@ -9,7 +9,7 @@ import { Participation } from './participation'
 })
 export class ParticipationService {
 
-  constructor(private http: HttpClient, private token: TokenComponent) { }
+  constructor(private http: HttpClient) { }
 
   participationUrl = "api/participations"
 
