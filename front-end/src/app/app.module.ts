@@ -32,6 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { ParticipationTableComponent } from './event/participation-table/participation-table.component';
+import { TokenComponent } from './token/token.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ParticipationTableComponent } from './event/participation-table/partici
     UsersComponent,
     UserTableComponent,
     UserDetailsComponent,
-    ParticipationTableComponent,    
+    ParticipationTableComponent,
+    TokenComponent,    
   ],
   imports: [
     HttpClientModule,

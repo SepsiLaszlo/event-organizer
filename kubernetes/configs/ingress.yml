@@ -53,7 +53,7 @@ spec:
       match: PathPrefix(`/api/events`)
       middlewares:
         - name: strip-api-prefix
-        - name: user-auth
+        # - name: user-auth
       services:
         - name: event-service
           port: 3000

@@ -31,4 +31,9 @@ export class NavBarComponent {
     )
   }
 
+  request(){
+    this.userService.request()
+  }
+
+
 }
