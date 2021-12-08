@@ -33,7 +33,11 @@ export class UserService {
   }
 
   current():Observable<User>{
-     return this.http.get<User>(`${this.userUrl}/current`, this.httpOptions())
+    var headers_object = new HttpHeaders().set("Authorization", "Bearer " + this.tokenService.getToken());
+
+     return this.http.get<User>(`${this.userUrl}/current`, {
+       headers: headers_object
+     })
   }
 
   request(){

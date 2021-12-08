@@ -11,18 +11,21 @@ export class TokenService {
   token:String = null;
 
   getToken():String{
+    this.token = localStorage.getItem("jwt-token")
     return this.token;
   }
 
   setToken(token){
     this.token = token;
+    localStorage.setItem("jwt-token", token);
+
   }
 
   headers():Object{
     return  {
       headers: new HttpHeaders({
         // 'Content-Type':  'application/json',
-        Authorization: `${this.token}`
+        Authorization: `${this.getToken()}`
       })}
   }
 }
