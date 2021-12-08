@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, partition } from 'rxjs';
+import { EventTargetLike } from 'rxjs/internal/observable/fromEvent';
+import { TokenService } from '../token.service';
 import { TokenComponent } from '../token/token.component';
 import { User } from '../user/user';
 import { Participation } from './participation'
@@ -9,7 +11,7 @@ import { Participation } from './participation'
 })
 export class ParticipationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   participationUrl = "api/participations"
 
@@ -20,8 +22,7 @@ export class ParticipationService {
 
   getForUser(id:number)
   {
-    
-    return this.http.get<Participation[]>(`${this.participationUrl}/for_user/${id}`);
+    return this.http.get<Participation[]>(`${this.participationUrl}/for_user/${id}`,this.tokenService.headers());
   }
 
   getForEvent(id:number)
