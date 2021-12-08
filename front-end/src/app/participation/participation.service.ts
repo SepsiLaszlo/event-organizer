@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { from, Observable, partition } from 'rxjs';
 import { EventTargetLike } from 'rxjs/internal/observable/fromEvent';
 import { TokenService } from '../token.service';
-import { TokenComponent } from '../token/token.component';
 import { User } from '../user/user';
 import { Participation } from './participation'
 @Injectable({
