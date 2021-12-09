@@ -126,8 +126,8 @@ class UsersController < ApplicationController
     end
 
     def current_user
-      user_id = session['user-id']
-
+      # user_id = session['user-id']
+      user_id = request.get_header("User-Id")
       User.find(user_id) if user_id
     end
 end
