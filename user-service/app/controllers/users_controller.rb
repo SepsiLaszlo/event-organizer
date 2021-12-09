@@ -94,7 +94,7 @@ class UsersController < ApplicationController
 
   def callback
     response = HTTParty.post('https://github.com/login/oauth/access_token',
-    query:{ client_id: ENV['GITHUB_CLINENT_ID'],
+    query:{ client_id: ENV['GITHUB_CLIENT_ID'],
       client_secret: ENV['GITHUB_CLIENT_SECRET'],
       code: params['code']})
 
