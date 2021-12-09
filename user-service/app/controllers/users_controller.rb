@@ -59,8 +59,8 @@ class UsersController < ApplicationController
       return render status: :forbidden
     end
 
-    response.set_header('User-Id',user_id)
-    response.set_header('User-Name',user.name)
+    response.set_header('X-User-Id',user_id)
+    response.set_header('X-User-Name',user.name)
     render status: :ok
   end
   
@@ -127,7 +127,9 @@ class UsersController < ApplicationController
 
     def current_user
       # user_id = session['user-id']
-      user_id = request.get_header("User-Id")
+
+      logger.info request.headers
+      user_id = request.get_header("HTTP_X_USER_ID")
       User.find(user_id) if user_id
     end
 end
