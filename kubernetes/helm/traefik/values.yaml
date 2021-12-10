@@ -264,7 +264,7 @@ ports:
     protocol: TCP
   web:
     port: 8000
-    hostPort: 80
+    # hostPort: 80
     expose: true
     exposedPort: 80
     # The port protocol (TCP/UDP)
@@ -278,7 +278,7 @@ ports:
     # redirectTo: websecure
   websecure:
     port: 8443
-    hostPort: 443
+    # hostPort: 443
     expose: true
     exposedPort: 443
     # The port protocol (TCP/UDP)
@@ -328,7 +328,7 @@ tlsOptions: {}
 # from.
 service:
   enabled: true
-  type: NodePort
+  type: LoadBalancer
   # Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
   annotations: {}
   # Additional annotations for TCP service only

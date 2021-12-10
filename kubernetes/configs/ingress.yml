@@ -35,8 +35,8 @@ spec:
   forwardAuth:
     address: http://user-service:3000/users/authenticate
     authResponseHeaders:
-      - User-Id
-      - User-Name      
+      - X-User-Id
+      - X-User-Name
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -64,6 +64,14 @@ spec:
       services:
         - name: user-service
           port: 3000
+    - kind: Rule
+      match: PathPrefix(`/api/users/current`)
+      middlewares:
+        - name: strip-api-prefix
+        - name: user-auth
+      services:
+        - name: user-service
+          port: 3000      
     - kind: Rule
       match: PathPrefix(`/api/participations`)
       middlewares:

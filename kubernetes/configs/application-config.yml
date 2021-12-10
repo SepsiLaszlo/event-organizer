@@ -7,3 +7,5 @@ data:
   rabbitmq_host: "rabbitmq-cluster"
   web_cpu_limit: 300m
   web_memory_limit: 300Mi
+  github_client_id: setrealvalue
+  github_client_secret: setrealvalue

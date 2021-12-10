@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: slaac/user-service:0.3.0
+        image: slaac/user-service:0.4.0
         ports:
         - containerPort: 3000
         env:
@@ -55,6 +55,16 @@ spec:
             configMapKeyRef:
               name: application-config
               key: rabbitmq_host
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: github_client_id
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: application-config
+              key: github_client_secret                        
 
 ---
 apiVersion: v1
