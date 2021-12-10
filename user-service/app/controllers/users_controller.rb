@@ -63,29 +63,7 @@ class UsersController < ApplicationController
     response.set_header('X-User-Name',user.name)
     render status: :ok
   end
-  
-  # POST /users/signin
-  def signin
-    user = User.find_by(email: params['email'])
-    payload = { id: user.id }
 
-    token = JWT.encode payload, nil, 'none'
-    render plain: "token: #{token}"
-  end
-
-
-  # POST /users/1/login
-  def login
-    session['user-id'] = @user.id
-
-    render json: @user
-  end
-
-
-  # POST /users/logout
-  def logout
-    reset_session
-  end
 
   # GET /users/current
   def current
@@ -112,6 +90,10 @@ class UsersController < ApplicationController
     redirect_to "/token?token=#{jwt}"
   end
 
+  def github_client_id
+    render json: {clientId: ENV['GITHUB_CLIENT_ID']}
+  end
+
     
   
   private
@@ -131,5 +113,7 @@ class UsersController < ApplicationController
       logger.info request.headers
       user_id = request.get_header("HTTP_X_USER_ID")
       User.find(user_id) if user_id
+
+      User.first
     end
 end
