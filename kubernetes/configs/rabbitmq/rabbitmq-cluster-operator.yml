@@ -4721,12 +4721,5 @@ spec:
         - containerPort: 9782
           name: metrics
           protocol: TCP
-        resources:
-          limits:
-            cpu: 200m
-            memory: 500Mi
-          requests:
-            cpu: 200m
-            memory: 500Mi
       serviceAccountName: rabbitmq-cluster-operator
       terminationGracePeriodSeconds: 10
