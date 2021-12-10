@@ -5,6 +5,7 @@ import { User } from './user';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TokenComponent } from '../token/token.component';
 import { TokenService } from '../token.service';
+import { ClientId } from '../client-id';
 
 
 @Injectable({
@@ -20,16 +21,16 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl);
   }
 
+  getClientID():Observable<ClientId>{
+    return this.http.get<ClientId>(`${this.userUrl}/github_client_id`)
+  }
+
   get(id:number):Observable<User>{
     return this.http.get<User>(`${this.userUrl}/${id}`)
   }
 
-  login(id:number){
-    return this.http.post(`${this.userUrl}/${id}/login`,"")
-  }
-
   logout(){
-    return this.http.post(`${this.userUrl}/logout`,"")
+    return this.tokenService.setToken(null)
   }
 
   current():Observable<User>{

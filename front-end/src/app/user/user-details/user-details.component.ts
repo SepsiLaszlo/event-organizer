@@ -30,12 +30,9 @@ export class UserDetailsComponent implements OnInit {
 
   }
 
-  login(){
-    this.userService.login(this.user.id).subscribe()
-  }
 
   logout(){
-    this.userService.logout().subscribe()
+    this.userService.logout()
   }
 
   current(){

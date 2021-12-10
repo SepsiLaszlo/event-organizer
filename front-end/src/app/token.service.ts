@@ -1,5 +1,6 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class TokenService {
     this.token = localStorage.getItem("jwt-token")
     return this.token;
   }
+
 
   setToken(token){
     this.token = token;

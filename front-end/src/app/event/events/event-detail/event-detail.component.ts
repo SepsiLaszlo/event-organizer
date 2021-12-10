@@ -35,7 +35,7 @@ export class EventDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getEvent(id)
-    this.participations$ = this.participationService.getForEvent(id).pipe( )
+    this.participations$ = this.participationService.getForEvent(id)
   }
   getEvent(id) {
     this.eventService.getEvent(id)
@@ -66,6 +66,7 @@ export class EventDetailComponent implements OnInit {
        }
        this.participationService.create(participation).subscribe(
          participation => console.log(participation)
+
          )
      }
    )

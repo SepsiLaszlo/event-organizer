@@ -19,16 +19,24 @@ export class NavBarComponent {
     );
 
   currentUser: User
+  clientUrl:string
   constructor(private breakpointObserver: BreakpointObserver,
     private userService: UserService) {
     userService.current().subscribe(
       user => this.currentUser = user
     )
-  }
-  logout(){
-    this.userService.logout().subscribe(
-      () => this.currentUser=null
+    userService.getClientID().subscribe(
+      clientId => this.clientUrl = `https://github.com/login/oauth/authorize?client_id=${clientId["clientId"]}`
     )
+  }
+
+  openLogin(){
+    document.defaultView.open(this.clientUrl,"_self")
+  }
+
+  logout(){
+    this.userService.logout()
+    this.currentUser = null
   }
 
   request(){
