@@ -14,6 +14,8 @@ deployment:
   kind: Deployment
   # Number of pods of the deployment (only applies when kind == Deployment)
   replicas: 1
+  # Amount of time (in seconds) before Kubernetes will send the SIGKILL signal if Traefik does not shut down
+  terminationGracePeriodSeconds: 60
   # Additional deployment annotations (e.g. for jaeger-operator sidecar injection)
   annotations: {}
   # Additional deployment labels (e.g. for filtering deployment by custom labels)
@@ -50,13 +52,15 @@ deployment:
   # dnsPolicy: ClusterFirstWithHostNet
   # Additional imagePullSecrets
   imagePullSecrets: []
-   # - name: myRegistryKeySecretName
+    # - name: myRegistryKeySecretName
 
 # Pod disruption budget
 podDisruptionBudget:
   enabled: false
   # maxUnavailable: 1
+  # maxUnavailable: 33%
   # minAvailable: 0
+  # minAvailable: 25%
 
 # Use ingressClass. Ignored if Traefik version < 2.3 / kubernetes < 1.18.x
 ingressClass:
@@ -109,8 +113,12 @@ providers:
   kubernetesCRD:
     enabled: true
     allowCrossNamespace: false
+    allowExternalNameServices: false
+    # ingressClass: traefik-internal
+    # labelSelector: environment=production,method=traefik
     namespaces: []
       # - "default"
+
   kubernetesIngress:
     enabled: true
     # labelSelector: environment=production,method=traefik
@@ -264,26 +272,26 @@ ports:
     protocol: TCP
   web:
     port: 8000
-    # hostPort: 80
+    # hostPort: 8000
     expose: true
     exposedPort: 80
     # The port protocol (TCP/UDP)
     protocol: TCP
     # Use nodeport if set. This is useful if you have configured Traefik in a
     # LoadBalancer
-    # nodePort: 80
+    nodePort: 32080
     # Port Redirections
     # Added in 2.2, you can make permanent redirects via entrypoints.
     # https://docs.traefik.io/routing/entrypoints/#redirection
     # redirectTo: websecure
   websecure:
     port: 8443
-    # hostPort: 443
+    # hostPort: 8443
     expose: true
     exposedPort: 443
     # The port protocol (TCP/UDP)
     protocol: TCP
-    # nodePort: 443
+    nodePort: 443
     # Set TLS at the entrypoint
     # https://doc.traefik.io/traefik/routing/entrypoints/#tls
     tls:
@@ -328,7 +336,7 @@ tlsOptions: {}
 # from.
 service:
   enabled: true
-  type: LoadBalancer
+  type: NodePort
   # Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
   annotations: {}
   # Additional annotations for TCP service only
@@ -337,8 +345,8 @@ service:
   annotationsUDP: {}
   # Additional service labels (e.g. for filtering Service by custom labels)
   labels: {}
-  # Additional entries here will be added to the service spec. Cannot contains
-  # type, selector or ports entries.
+  # Additional entries here will be added to the service spec.
+  # Cannot contain type, selector or ports entries.
   spec: {}
     # externalTrafficPolicy: Cluster
     # loadBalancerIP: "1.2.3.4"
@@ -348,6 +356,8 @@ service:
     # - 172.16.0.0/16
   externalIPs: []
     # - 1.2.3.4
+  # One of SingleStack, PreferDualStack, or RequireDualStack.
+  # ipFamilyPolicy: SingleStack
 
 ## Create HorizontalPodAutoscaler object.
 ##
