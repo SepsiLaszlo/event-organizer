@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: application-config
 data:
-  web_host: "myapp.com"
+  web_host: "sepsilaszlo.hu"
   rabbitmq_host: "rabbitmq-cluster"
   web_cpu_limit: 300m
   web_memory_limit: 300Mi

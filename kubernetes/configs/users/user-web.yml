@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: slaac/user-service:0.4.0
+        image: slaac/user-service:0.4.1
         ports:
         - containerPort: 3000
         env:
