@@ -87,7 +87,7 @@ class UsersController < ApplicationController
 
     jwt = JWT.encode payload, nil, 'none'
   
-    redirect_to "/token?token=#{jwt}"
+    redirect_to "https://#{ENV['WEB_HOST']}/token?token=#{jwt}"
   end
 
   def github_client_id
