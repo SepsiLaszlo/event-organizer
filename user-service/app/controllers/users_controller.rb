@@ -114,6 +114,6 @@ class UsersController < ApplicationController
       user_id = request.get_header("HTTP_X_USER_ID")
       User.find(user_id) if user_id
 
-      # User.first
+      User.first
     end
 end

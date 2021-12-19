@@ -1,16 +1,15 @@
-<h1 mat-dialog-title>Favorite Animal</h1>
 <div mat-dialog-content>
 
   <mat-form-field appearance="fill">
     <mat-label>Fill form field</mat-label>
-    <input matInput placeholder="Placeholder" value='{{data["event"].name}}' #eventName>
-    <mat-hint>Hint</mat-hint>
+    <input matInput placeholder="Placeholder" [value]="event.name" (input)="event.name=getValue($event)" >
   </mat-form-field>
   <br>
   <mat-form-field appearance="fill">
     <mat-label>Fill form field</mat-label>
-    <textarea matInput placeholder="Placeholder" value='{{data["event"].description}}' #eventName></textarea>
-    <mat-hint>Hint</mat-hint>
+    <textarea matInput placeholder="Placeholder" [value]="event.description" (input)="event.description=getValue($event)" ></textarea>
   </mat-form-field>
-  
+  <div class="example-button-row">
+    <button (click)="updateEvent()" mat-raised-button color="primary">Mentés</button>
+  </div>
 </div>

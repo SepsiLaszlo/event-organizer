@@ -66,6 +66,7 @@ export class EventDetailComponent implements OnInit {
        }
        this.participationService.create(participation).subscribe(
          participation => console.log(participation)
+        
 
          )
      }
