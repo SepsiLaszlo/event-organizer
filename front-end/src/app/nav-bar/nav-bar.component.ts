@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 import { User } from '../user/user';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,12 +22,19 @@ export class NavBarComponent {
   currentUser: User
   clientUrl:string
   constructor(private breakpointObserver: BreakpointObserver,
-    private userService: UserService) {
+    private userService: UserService, private tokenService: TokenService) {
     userService.current().subscribe(
       user => this.currentUser = user
     )
     userService.getClientID().subscribe(
       clientId => this.clientUrl = `https://github.com/login/oauth/authorize?client_id=${clientId["clientId"]}`
+    )
+
+    tokenService.getTokenSetSubject().subscribe(
+      () =>
+      {
+        userService.current().subscribe(user => this.currentUser = user )
+      }
     )
   }
 
@@ -42,6 +50,7 @@ export class NavBarComponent {
   request(){
     this.userService.request()
   }
+
 
 
 }
